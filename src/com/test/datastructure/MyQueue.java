@@ -54,7 +54,7 @@ public class MyQueue {
 		System.out.printf("isEmpty()=%b\n", queue.isEmpty());
 		System.out.printf("size()=%d\n", queue.size());
 		while (!queue.isEmpty()) {
-			System.out.printf("size()=%d\n", queue.pop());
+			System.out.printf("value=%d\n", queue.pop());
 		}
 	}
 	

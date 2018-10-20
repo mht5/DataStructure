@@ -197,7 +197,7 @@ public class BSTree<T extends Comparable<T>> {
 		}
 	}
 	
-	private void remove(BSTree tree, BSTNode node) {
+	private BSTNode<T> remove(BSTree tree, BSTNode node) {
 		BSTNode<T> x = null;
 		BSTNode<T> y = null;
 		if (node.left == null || node.right == null) {
@@ -210,7 +210,103 @@ public class BSTree<T extends Comparable<T>> {
 		} else {
 			x = y.right;
 		}
+		if (x != null) {
+			x.parent = y.parent;
+		}
+		if (y.parent == null) {
+			tree.root = x;
+		} else if (y == y.parent.left) {
+			y.parent.left = x;
+		} else {
+			y.parent.right = x;
+		}
+		if (y != node) {
+			node.key = y.key;
+		}
+		return y;
+	}
+	
+	public void remove(T key) {
+		BSTNode node1, node2;
+		if ((node1 = search(root, key)) != null) {
+			if ((node2 = remove(this, node1)) != null) {
+				node2 = null;
+			}
+		}
+	}
+	
+	private void print(BSTNode<T> root, T key, int direction) {
+		if (root != null) {
+			if (direction == 0) {
+				System.out.printf("%2d is root\n", root.key);
+			} else {
+				System.out.printf("%2d is %2d's %6s child\n", root.key, key, direction==1 ? "right" : "left");
+			}
+			print(root.left, root.key, -1);
+			print(root.right, root.key, 1);
+		}
+	}
+	
+	public void print() { 
+		if (root != null) {
+			print(root, root.key, 0);
+		}
+	}
+	
+	private void destroy(BSTNode<T> root) {
+		if (root == null) {
+			return;
+		}
+		if (root.left != null) {
+			destroy(root.left);
+		}
+		if (root.right != null) {
+			destroy(root.right);
+		}
+		root = null;
+	}
+	
+	public void clear() {
+		destroy(root);
+		root = null;
+	}
+	
+	public static void main(String[] args) {
+		int arr[] = {1,5,4,3,2,6};
+		int i, ilen;
+		BSTree<Integer> tree=new BSTree<Integer>();
 		
+		System.out.print("依次添加: ");
+		ilen = arr.length;
+		for(i=0; i<ilen; i++) {
+			System.out.print(arr[i]+" ");
+			tree.insert(arr[i]);
+		}
+		
+		System.out.print("\n前序遍历: ");
+		tree.preOrder();
+		
+		System.out.print("\n中序遍历: ");
+		tree.inOrder();
+		
+		System.out.print("\n后序遍历: ");
+		tree.postOrder();
+		System.out.println();
+		
+		System.out.println("最小值: "+ tree.min());
+		System.out.println("最大值: "+ tree.max());
+		System.out.println("树的详细信息: ");
+		tree.print();
+		
+		System.out.print("\n删除根节点: "+ arr[3]);
+		tree.remove(arr[3]);
+		
+		System.out.print("\n中序遍历: ");
+		tree.inOrder();
+		System.out.println();
+		
+		// 销毁二叉树
+		tree.clear();
 	}
 	
 }

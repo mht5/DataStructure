@@ -1,6 +1,6 @@
 package com.test.datastructure;
 
-public class DLink<T> {
+public class MyDLink<T> {
 
 	private class DNode<T> {
 		public DNode prev;
@@ -17,7 +17,7 @@ public class DLink<T> {
 	private DNode<T> head;
 	private int count;
 	
-	public DLink() {
+	public MyDLink() {
 		head = new DNode(null, null, null);
 		head.prev = head.next = head;
 		count = 0;
@@ -75,7 +75,7 @@ public class DLink<T> {
 		DNode<T> oldNode = getNode(index);
 		DNode<T> newNode = new DNode(value, oldNode.prev, oldNode);
 		oldNode.prev.next = newNode;
-		newNode.next = oldNode;
+		oldNode.prev = newNode;
 		count++;
 		return;
 	}
@@ -109,7 +109,7 @@ public class DLink<T> {
 	public static void main(String[] args) {
 		String[] sarr = {"111", "222", "333", "444"};
 		
-		DLink<String> link = new DLink<String>();
+		MyDLink<String> link = new MyDLink<String>();
 		
 		link.insert(0, sarr[1]);
 		link.appendLast(sarr[0]);
