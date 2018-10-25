@@ -13,6 +13,7 @@ public class MyStack<T> {
 		this(type, DEFAULT_SIZE);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public MyStack(Class<T> type, int size) {
 		myArray = (T[]) Array.newInstance(type, size);
 		count = 0;
