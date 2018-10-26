@@ -10,9 +10,10 @@ public class MyStack1<T> {
 	private T[] array;
 	private int top;
 	private int size;
+	private final static int DEFAULT_SIZE = 10;
 	
 	public MyStack1(Class<T> type) {
-		this(type, 2);
+		this(type, DEFAULT_SIZE);
 	}
 	
 	@SuppressWarnings("unchecked")
