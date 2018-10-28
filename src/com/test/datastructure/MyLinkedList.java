@@ -73,11 +73,10 @@ public class MyLinkedList {
 		}
 		if(current == head) {
 			head = head.next;
-			size--;
 		} else {
 			previous.next = current.next;
-			size--;
 		}
+		size--;
 		return true;
 	}
 	
