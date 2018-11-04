@@ -1,4 +1,4 @@
-package com.test.datastructure;
+package com.test.datastructure.tree;
 
 public class BSTree<T extends Comparable<T>> {
 

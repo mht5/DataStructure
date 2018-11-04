@@ -1,4 +1,4 @@
-package com.test.datastructure;
+package com.test.datastructure.tree;
 
 /**
  * https://blog.csdn.net/eson_15/article/details/51144079

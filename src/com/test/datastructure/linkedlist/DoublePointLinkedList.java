@@ -1,10 +1,9 @@
-package com.test.datastructure;
+package com.test.datastructure.linkedlist;
 
-public class MyDLink1 {
-
+public class DoublePointLinkedList {
+	
 	private class Node {
 		private int value;
-		private Node prev;
 		private Node next;
 		
 		public Node(int value) {
@@ -16,56 +15,48 @@ public class MyDLink1 {
 	private Node tail;
 	private int size;
 	
-	public MyDLink1() {
+	public DoublePointLinkedList() {
 		head = null;
 		tail = null;
 		size = 0;
 	}
 	
-	public void insertFirst(int value) {
+	public void addFirst(int value) {
 		Node node = new Node(value);
 		if (size == 0) {
 			head = node;
 			tail = node;
 		} else {
-			head.prev = node;
 			node.next = head;
 			head = node;
 		}
 		size++;
 	}
 	
-	public void insertLast(int value) {
+	public void addLast(int value) {
 		Node node = new Node(value);
 		if (size == 0) {
 			head = node;
 			tail = node;
 		} else {
 			tail.next = node;
-			node.prev = tail;
 			tail = node;
 		}
 		size++;
 	}
 	
-	public Node deleteFirst() {
-		Node tmp = head;
-		if (size != 0) {
+	public boolean removeFirst(int value) {
+		if (size < 1) {
+			return false;
+		}
+		if (head.next == null) {
+			head = null;
+			tail = null;
+		} else {
 			head = head.next;
-			head.prev = null;
-			size--;
 		}
-		return tmp;
-	}
-	
-	public Node deleteLast() {
-		Node tmp = tail;
-		if (size != 0) {
-			tail = tail.prev;
-			tail.next = null;
-			size--;
-		}
-		return tmp;
+		size--;
+		return true;
 	}
 	
 	public int size() {
@@ -104,17 +95,14 @@ public class MyDLink1 {
 	}
 	
 	public static void main(String[] args) {
-		int[] arr = {111, 222, 333, 444};
-		
-		MyDLink1 link = new MyDLink1();
-		
-		link.insertFirst(arr[1]);
-		link.insertLast(arr[0]);
-		link.insertFirst(arr[2]);
-		
-		System.out.printf("isEmpty()=%b\n", link.isEmpty());
-		System.out.printf("size()=%d\n", link.size());
-		System.out.println(link);
+		DoublePointLinkedList list = new DoublePointLinkedList();
+		list.addLast(1);
+		list.addLast(2);
+		list.addLast(3);
+		list.addLast(4);
+		System.out.println(list);
+		list.removeFirst(3);
+		System.out.println(list);
 	}
-	
+
 }

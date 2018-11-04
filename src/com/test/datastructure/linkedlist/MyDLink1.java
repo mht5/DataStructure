@@ -1,9 +1,10 @@
-package com.test.datastructure;
+package com.test.datastructure.linkedlist;
 
-public class DoublePointLinkedList {
-	
+public class MyDLink1 {
+
 	private class Node {
 		private int value;
+		private Node prev;
 		private Node next;
 		
 		public Node(int value) {
@@ -15,48 +16,56 @@ public class DoublePointLinkedList {
 	private Node tail;
 	private int size;
 	
-	public DoublePointLinkedList() {
+	public MyDLink1() {
 		head = null;
 		tail = null;
 		size = 0;
 	}
 	
-	public void addFirst(int value) {
+	public void insertFirst(int value) {
 		Node node = new Node(value);
 		if (size == 0) {
 			head = node;
 			tail = node;
 		} else {
+			head.prev = node;
 			node.next = head;
 			head = node;
 		}
 		size++;
 	}
 	
-	public void addLast(int value) {
+	public void insertLast(int value) {
 		Node node = new Node(value);
 		if (size == 0) {
 			head = node;
 			tail = node;
 		} else {
 			tail.next = node;
+			node.prev = tail;
 			tail = node;
 		}
 		size++;
 	}
 	
-	public boolean removeFirst(int value) {
-		if (size < 1) {
-			return false;
-		}
-		if (head.next == null) {
-			head = null;
-			tail = null;
-		} else {
+	public Node deleteFirst() {
+		Node tmp = head;
+		if (size != 0) {
 			head = head.next;
+			head.prev = null;
+			size--;
 		}
-		size--;
-		return true;
+		return tmp;
+	}
+	
+	public Node deleteLast() {
+		Node tmp = tail;
+		if (size != 0) {
+			tail = tail.prev;
+			tail.next = null;
+			size--;
+		}
+		return tmp;
 	}
 	
 	public int size() {
@@ -95,14 +104,17 @@ public class DoublePointLinkedList {
 	}
 	
 	public static void main(String[] args) {
-		DoublePointLinkedList list = new DoublePointLinkedList();
-		list.addLast(1);
-		list.addLast(2);
-		list.addLast(3);
-		list.addLast(4);
-		System.out.println(list);
-		list.removeFirst(3);
-		System.out.println(list);
+		int[] arr = {111, 222, 333, 444};
+		
+		MyDLink1 link = new MyDLink1();
+		
+		link.insertFirst(arr[1]);
+		link.insertLast(arr[0]);
+		link.insertFirst(arr[2]);
+		
+		System.out.printf("isEmpty()=%b\n", link.isEmpty());
+		System.out.printf("size()=%d\n", link.size());
+		System.out.println(link);
 	}
-
+	
 }
