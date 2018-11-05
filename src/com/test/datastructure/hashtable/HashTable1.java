@@ -1,7 +1,7 @@
 package com.test.datastructure.hashtable;
 
 /**
- * 使用线性探测实现的哈希表
+ * 使用线性探测法实现的哈希表
  * @author mhts
  * @date 2018年11月4日
  */
